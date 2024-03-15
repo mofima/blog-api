@@ -1,11 +1,13 @@
 from rest_framework import serializers
 
+from drf_spectacular.utils import extend_schema_field
+
 from .models import Category, Article, Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    article_name = serializers.SerializerMethodField()
-    author_name = serializers.SerializerMethodField()
+    article_name: str = serializers.SerializerMethodField()
+    author_name: str = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
@@ -19,10 +21,12 @@ class CommentSerializer(serializers.ModelSerializer):
             "created_at",
         ]
 
-    def get_article_name(self, obj):
+    @extend_schema_field(str)
+    def get_article_name(self, obj) -> str:
         return obj.article.topic
 
-    def get_author_name(self, obj):
+    @extend_schema_field(str)
+    def get_author_name(self, obj) -> str:
         return obj.author.username
 
 
@@ -35,8 +39,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    category_name = serializers.SerializerMethodField()
-    author_name = serializers.SerializerMethodField()
+    category_name: str = serializers.SerializerMethodField()
+    author_name: str = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
@@ -53,8 +57,10 @@ class ArticleSerializer(serializers.ModelSerializer):
             "comments",
         ]
 
-    def get_category_name(self, obj):
+    @extend_schema_field(str)
+    def get_category_name(self, obj) -> str:
         return obj.category.name
 
-    def get_author_name(self, obj):
+    @extend_schema_field(str)
+    def get_author_name(self, obj) -> str:
         return obj.author.username

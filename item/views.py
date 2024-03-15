@@ -30,7 +30,7 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
-    permission_classes = permissions.IsAuthenticated
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
