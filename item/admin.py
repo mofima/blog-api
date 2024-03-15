@@ -16,7 +16,7 @@ admin.site.register(Article, ArtcileAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ["text", "article", "created_by", "created_at"]
+    list_display = ["text", "article", "author", "created_at"]
     list_filter = ["article", "created_at"]
     search_fields = ["text"]
 

@@ -15,7 +15,7 @@ class CommentSerializer(serializers.ModelSerializer):
             "article",
             "article_name",
             "author_name",
-            "created_by",
+            "author",
             "created_at",
         ]
 
@@ -23,7 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
         return obj.article.topic
 
     def get_author_name(self, obj):
-        return obj.created_by.username
+        return obj.author.username
 
 
 class CategorySerializer(serializers.ModelSerializer):
